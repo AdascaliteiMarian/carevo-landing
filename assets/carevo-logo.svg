@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="220" height="36" viewBox="0 0 220 36" role="img" aria-label="Carevo">
+  <defs>
+    <linearGradient id="g" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#0ea5e9"/><stop offset="1" stop-color="#22d3ee"/>
+    </linearGradient>
+  </defs>
+  <g fill="none" fill-rule="evenodd">
+    <path d="M18 6c3.7 0 7.1 1.7 9.3 4.5-2.7 2.3-6 3.5-9.3 3.5S11.4 12.8 9 10.5C11.3 7.7 14.7 6 18 6Z" fill="url(#g)"/>
+    <path d="M18 28c-3.7 0-7.1-1.7-9.3-4.5 2.7-2.3 6-3.5 9.3-3.5s7.1 1.2 9.3 3.5C25.7 26.3 21.3 28 18 28Z" fill="url(#g)" opacity=".85"/>
+    <text x="40" y="26" font-family="Inter,system-ui,Segoe UI,Arial" font-size="24" font-weight="700" fill="#eaf2ff" letter-spacing="0.5">CAREVO</text>
+  </g>
+</svg>
