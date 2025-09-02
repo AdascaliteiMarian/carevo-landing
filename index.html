@@ -15,15 +15,15 @@
 
     <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
     <link rel="stylesheet" href="styles.css" />
-    <script defer src="app.js"></script>
 </head>
 
 <body>
     <header>
         <div class="container nav">
             <div class="brand">
-                <div class="logo" aria-hidden="true"> <img src="assets/carevo-logo.svg" alt="Carevo" height="36" />  </div>
-           
+                <div class="logo" aria-hidden="true"> <img src="assets/carevo-logo.svg" alt="Carevo" height="36" />
+                </div>
+
             </div>
             <div class="cta">
                 <a href="#produse" class="btn secondary">Produse</a>
@@ -61,7 +61,7 @@
 
     <footer>
         <div class="container">
-            <div class="muted footer-links">© <span id="y"></span> Carevo. Toate drepturile rezervate.
+            <div class="muted footer-links"><span id="y"></span> Carevo. Toate drepturile rezervate.
                 <br>
                 <a href="pages/termeni-si-conditii.html" class="muted">Termeni si condiții</a>
                 <br>
@@ -127,6 +127,46 @@
             </div>
         </form>
     </dialog>
+
+    <!-- Modal Detalii Produs -->
+    <!-- IMPORTANT: ID-urile de mai jos sunt folosite de app.js -->
+    <dialog id="product-modal" aria-labelledby="pm-title">
+        <div class="modal-head">
+            <strong id="pm-title">Detalii produs</strong>
+            <button class="btn x" id="pm-close" aria-label="Închide">✕</button>
+        </div>
+        <div class="modal-body">
+            <div class="pm-body">
+                <img id="pm-img" class="pm-img" src="" alt="" />
+                <div class="pm-meta">
+                    <span class="pill" id="pm-badge">Produs</span>
+                    <div class="price" aria-live="polite">
+                        <span id="pm-price" class="now">0 lei</span>
+                        <span id="pm-old" class="old"></span>
+                    </div>
+                    <ul id="pm-features" class="features"></ul>
+                    <p id="pm-desc" class="pm-desc"></p>
+                </div>
+            </div>
+        </div>
+        <div class="modal-foot">
+            <button class="btn secondary" id="pm-close-2">Închide</button>
+            <button class="btn" id="pm-to-cart">Comandă acest produs</button>
+        </div>
+    </dialog>
+
+    <script>
+        // sincronizează butoanele de închidere din footer și header
+        (function(){
+            const dlg = document.getElementById('product-modal');
+            const c1 = document.getElementById('pm-close');
+            const c2 = document.getElementById('pm-close-2');
+            if(c1) c1.addEventListener('click', ()=> dlg.close());
+            if(c2) c2.addEventListener('click', ()=> dlg.close());
+        })();
+    </script>
+
+    <script defer src="app.js"></script>
 </body>
 
 </html>

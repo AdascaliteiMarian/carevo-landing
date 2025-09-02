@@ -33,6 +33,10 @@ a {
   padding: 0 16px;
 }
 
+main {
+  padding: 14px;
+}
+
 /* header */
 header {
   position: sticky;
@@ -217,19 +221,18 @@ footer {
   margin-top: 32px;
 }
 
-.footer-links {
-    gap: 14px;
-}
 .footer-grid {
   display: flex;
   gap: 12px;
   align-items: center;
   justify-content: space-between;
+
   flex-wrap: wrap;
 }
 .footer-links {
   display: flex;
-  gap: 14px;
+  flex-direction: column;
+  gap: 6px;
 }
 .footer-links a {
   opacity: 0.9;
@@ -303,6 +306,13 @@ dialog {
 @media (min-width: 720px) {
   .row {
     grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 500px) {
+  .ribbon {
+    width: 100%;
+    max-width: 420px;
   }
 }
 label {
