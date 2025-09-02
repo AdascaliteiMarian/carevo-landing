@@ -1,6 +1,6 @@
 import { neon } from '@netlify/neon';
 
-const sql = neon(); // folosește NETLIFY_DATABASE_URL
+const sql = neon(); // folosește NETLIFY_DATABASE_URL automat
 
 export async function handler() {
   try {

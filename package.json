@@ -1,0 +1,11 @@
+{
+  "name": "carevo-site",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "echo 'static site' && exit 0"
+  },
+  "dependencies": {
+    "@netlify/neon": "^0.1.0"
+  }
+}

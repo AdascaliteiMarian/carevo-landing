@@ -6,9 +6,10 @@ export async function handler(event) {
   if (event.httpMethod !== 'POST') {
     return { statusCode: 405, body: 'Method Not Allowed' };
   }
-
   try {
-    const { name, phone, address, product: productId, qty } = JSON.parse(event.body || '{}');
+    const { name, phone, address, product: productId, qty } =
+      JSON.parse(event.body || '{}');
+
     if (!name || !phone || !address || !productId || !qty) {
       return { statusCode: 400, body: 'Missing fields' };
     }
