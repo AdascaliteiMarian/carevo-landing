@@ -40,14 +40,14 @@ async function loadProducts() {
 
   select.innerHTML = PRODUCTS.map(p => `<option value="${p.id}" data-price="${p.price}">${p.name} — ${p.price} lei</option>`).join('');
 
-  function priceOf(id){ return PRODUCTS.find(p=>p.id===id)?.price || 0 }
-  function updateTotal(){ total.textContent = `Total: ${ priceOf(select.value) * Math.max(1, +qty.value||1) } lei` }
+  function priceOf(id) { return PRODUCTS.find(p => p.id === id)?.price || 0 }
+  function updateTotal() { total.textContent = `Total: ${priceOf(select.value) * Math.max(1, +qty.value || 1)} lei` }
   updateTotal();
   qty.addEventListener('input', updateTotal);
   select.addEventListener('change', updateTotal);
 
-  document.querySelectorAll('[data-open-checkout]').forEach(el=>{
-    el.addEventListener('click', ()=>{
+  document.querySelectorAll('[data-open-checkout]').forEach(el => {
+    el.addEventListener('click', () => {
       ok.classList.add('hide');
       document.getElementById('order-form').reset();
       updateTotal();
@@ -56,8 +56,8 @@ async function loadProducts() {
   });
 
   // Card → Comandă acum
-  document.querySelectorAll('[data-buy]').forEach(btn=>{
-    btn.addEventListener('click',()=>{
+  document.querySelectorAll('[data-buy]').forEach(btn => {
+    btn.addEventListener('click', () => {
       select.value = btn.dataset.buy; updateTotal();
       ok.classList.add('hide');
       document.getElementById('order-form').reset();
@@ -67,13 +67,13 @@ async function loadProducts() {
   });
 
   // --- Submit comandă (salvează în DB prin function saveOrder)
-  document.getElementById('submit-order').addEventListener('click', async (e)=>{
+  document.getElementById('submit-order').addEventListener('click', async (e) => {
     e.preventDefault();
     const name = document.getElementById('n').value.trim();
     const phone = document.getElementById('p').value.trim();
     const address = document.getElementById('a').value.trim();
-    const pid = select.value; const qtyVal = Math.max(1, +qty.value||1);
-    if(!name || !phone || !address){ alert('Te rugăm să completezi numele, telefonul și adresa.'); return; }
+    const pid = select.value; const qtyVal = Math.max(1, +qty.value || 1);
+    if (!name || !phone || !address) { alert('Te rugăm să completezi numele, telefonul și adresa.'); return; }
 
     const payload = { name, phone, address, product: pid, qty: qtyVal };
     const res = await fetch('/.netlify/functions/saveOrder', {
@@ -87,9 +87,15 @@ async function loadProducts() {
       return;
     }
     ok.classList.remove('hide');
+
+    // close dialog and reset form after 5 seconds
+    setTimeout(() => {
+      dlg.close();
+      document.getElementById('order-form').reset();
+    }, 5000);
   });
 
-  document.querySelectorAll('button[value="close"]').forEach(b=>b.addEventListener('click',()=>dlg.close()));
+  document.querySelectorAll('button[value="close"]').forEach(b => b.addEventListener('click', () => dlg.close()));
 
   // --- Modal Detalii produs (scrollable)
   const pm = document.getElementById('product-modal');
@@ -104,26 +110,26 @@ async function loadProducts() {
     const pmClose = document.getElementById('pm-close');
     const pmToCart = document.getElementById('pm-to-cart');
 
-    document.querySelectorAll('[data-details]').forEach(btn=>{
-      btn.addEventListener('click',()=>{
-        const p = PRODUCTS.find(x=>x.id===btn.dataset.details);
-        if(!p) return;
+    document.querySelectorAll('[data-details]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const p = PRODUCTS.find(x => x.id === btn.dataset.details);
+        if (!p) return;
         pmTitle.textContent = p.name;
         pmImg.src = p.img; pmImg.alt = p.name;
         pmBadge.textContent = p.badge || 'Produs';
         pmPrice.textContent = `${p.price} lei`;
         pmOld.textContent = p.oldPrice ? `${p.oldPrice} lei` : '';
-        pmFeatures.innerHTML = p.features.map(f=>`<li>${f}</li>`).join('');
+        pmFeatures.innerHTML = p.features.map(f => `<li>${f}</li>`).join('');
         pmDesc.textContent = p.desc || '';
         pm.showModal();
-        pmToCart.onclick = ()=>{
+        pmToCart.onclick = () => {
           pm.close();
           select.value = p.id; updateTotal();
           dlg.showModal();
         };
       });
     });
-    pmClose.addEventListener('click',()=>pm.close());
+    pmClose.addEventListener('click', () => pm.close());
   }
 
   // Footer year
